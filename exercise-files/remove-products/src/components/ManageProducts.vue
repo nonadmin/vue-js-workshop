@@ -14,6 +14,7 @@
 
 <script>
 import uuid from 'uuid';
+import Vue from 'vue';
 import ProductList from './ProductList';
 import SaveProductForm from './SaveProductForm';
 
@@ -79,7 +80,9 @@ export default {
       this.productInForm = initialData().productInForm;
     },
     onEditClicked(product) {
-      this.productInForm = product;
+      // Since objects are passed by reference, we use a Vue utility to clone
+      // the product to be edited.
+      this.productInForm = Vue.util.extend({}, product);
     }
   }
 }
